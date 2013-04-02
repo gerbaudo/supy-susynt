@@ -1,0 +1,5 @@
+localSetupROOT
+source $ROOTCOREDIR/scripts/setup.sh
+export PYTHONPATH=$PYTHONPATH:`pwd`                     # add directory containing supy to your python path
+export PATH=$PATH:`pwd`/supy/bin                        # optionally add to your path
+supy analyses/example_analysis.py --loop 1
