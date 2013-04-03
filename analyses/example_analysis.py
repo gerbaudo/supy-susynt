@@ -1,4 +1,5 @@
 import calculables
+import steps
 import supy
 import ROOT as r
 
@@ -7,11 +8,15 @@ class example_analysis(supy.analysis):
     def listOfSteps(self, config):
         return [supy.steps.printer.progressPrinter(),
                 supy.steps.histos.value('Two', 10, 0, 10),
+                supy.steps.filters.value('sameSign',min=1),
+                supy.steps.filters.value('oppositeFlavor',min=1),
                 supy.steps.histos.multiplicity('signalJets',8),
-                supy.steps.printer.printstuff(['sameSign','oppositeSign',
-                                               'sameFlavor','oppositeFlavor',
-                                               #'signalpts'
-                                               ]),
+                supy.steps.filters.multiplicity('signalJets',min=2),
+                steps.histos.absEta('signalJets',20,0.,5.,'indicesSignalJets'),
+#                 supy.steps.printer.printstuff(['sameSign','oppositeSign',
+#                                                'sameFlavor','oppositeFlavor',
+#                                                #'signalpts'
+#                                                ]),
                 ]
 
     def listOfCalculables(self, config):
@@ -21,7 +26,8 @@ class example_analysis(supy.analysis):
                 [cdil.signalLeptons(),
                  cdil.sameSign(), cdil.oppositeSign(),
                  cdil.sameFlavor(), cdil.oppositeFlavor(),
-                 cj.signalJets()] +
+                 cj.signalJets(), cj.indicesSignalJets(),
+                 ] +
                 [supy.calculables.other.fixedValue('Two', 2)]
                 )
 
@@ -44,5 +50,6 @@ class example_analysis(supy.analysis):
         org = self.organizer(pars)
         org.scale(lumiToUseInAbsenceOfData=20.0)
         supy.plotter(org,
+                     doLog=False,
                      pdfFileName=self.pdfFileName(org.tag),
                      ).plotAll()
