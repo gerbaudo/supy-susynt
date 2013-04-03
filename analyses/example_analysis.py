@@ -1,3 +1,4 @@
+import calculables
 import supy
 import ROOT as r
 
@@ -6,10 +7,21 @@ class example_analysis(supy.analysis):
     def listOfSteps(self, config):
         return [supy.steps.printer.progressPrinter(),
                 supy.steps.histos.value('Two', 10, 0, 10),
+                supy.steps.histos.multiplicity('signalJets',8),
+                supy.steps.printer.printstuff(['sameSign','oppositeSign',
+                                               'sameFlavor','oppositeFlavor',
+                                               #'signalpts'
+                                               ]),
                 ]
 
     def listOfCalculables(self, config):
+        cdil = calculables.dilepton
+        cj = calculables.jet
         return (supy.calculables.zeroArgs(supy.calculables) +
+                [cdil.signalLeptons(),
+                 cdil.sameSign(), cdil.oppositeSign(),
+                 cdil.sameFlavor(), cdil.oppositeFlavor(),
+                 cj.signalJets()] +
                 [supy.calculables.other.fixedValue('Two', 2)]
                 )
 
