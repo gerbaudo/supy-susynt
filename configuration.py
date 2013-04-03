@@ -1,3 +1,4 @@
+import os
 from supy.defaults import *
 import supy
 
@@ -6,7 +7,6 @@ def experiment() :
 
 def mainTree() :
     return ("/","susyNt")
-    #return ("/","trigger")
 
 def otherTreesToKeepWhenSkimming() :
     return []
@@ -18,8 +18,8 @@ def useCachedFileLists() :
     return False #True
 
 def cppFiles() :
-    print 'calling cppFiles'
-    return ['/tmp/gerbaudo/supy-rootcore/RootCore/scripts/load_packages.C',
+    rootcore = os.environ['ROOTCOREDIR']
+    return [rootcore+'/scripts/load_packages.C',
             "cpp/linkdef.cxx",
             ]
 
@@ -38,18 +38,5 @@ def haddErrorsToIgnore() :
             ]
 
 def initializeROOT(r, cppFiles = []) :
-    print 'initializeROOT'
     supy.defaults.initializeROOT(r, cppFiles)
-    r.gROOT.SetBatch(1)
-    print 'load_packages'
     r.load_packages()
-
-# this seems to hang supy...to be investigated
-#def cppROOTDictionariesToGenerate() :
-#        return [ ("vector<vector<vector<float> > >", "vector"),
-#                 ]
-
-def leavesToBlackList() :
-    return ["ph_vx_convTrk_weight","trig_bgCode"]
-
-def useCachedFileLists() : return False
