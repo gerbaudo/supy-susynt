@@ -18,4 +18,10 @@ class signalJets(supy.wrappedChain.calculable) :
         if minJvf : self.moreName += "JVF>%.1f"%minJvf        
     def update(self, _) :
         self.value = [j for j in self.source['jets']
-                      if abs(j.Eta())<self.maxEta and j.Pt()>self.minPt and j.jvf>self.minJvf]
+                      if abs(j.Eta())<self.maxEta and j.Pt()>self.minPt and \
+                      (j.jvf < 0.0 or j.jvf>self.minJvf)]
+
+class indicesSignalJets(supy.wrappedChain.calculable) :
+    def update(self, _) :
+        self.value = [i for i,jj in enumerate(self.source['signalJets'])]
+
