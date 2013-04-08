@@ -22,14 +22,14 @@ class example_analysis(supy.analysis):
     def listOfCalculables(self, config):
         cdil = calculables.dilepton
         cj = calculables.jet
-        return (supy.calculables.zeroArgs(supy.calculables) +
-                [cdil.signalLeptons(),
-                 cdil.sameSign(), cdil.oppositeSign(),
-                 cdil.sameFlavor(), cdil.oppositeFlavor(),
-                 cdil.diMuon(), cdil.diElectron(),
-                 cj.signalJets(), cj.indicesSignalJets(),
-                 ]                
-                )
+        lcals =  supy.calculables.zeroArgs(supy.calculables)
+        lcals += [cdil.signalLeptons(),
+                  cdil.sameSign(), cdil.oppositeSign(),
+                  cdil.sameFlavor(), cdil.oppositeFlavor(),
+                  cdil.diMuon(), cdil.diElectron(),
+                  cj.signalJets(), cj.indicesSignalJets(),
+                  ]
+        return lcals
 
     def listOfSampleDictionaries(self):
         dir = '/gdata/atlas/ucintprod/SusyNt/susy_n0135'
