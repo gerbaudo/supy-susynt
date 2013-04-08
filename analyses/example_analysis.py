@@ -7,7 +7,6 @@ import ROOT as r
 class example_analysis(supy.analysis):
     def listOfSteps(self, config):
         return [supy.steps.printer.progressPrinter(),
-                supy.steps.histos.value('Two', 10, 0, 10),
                 supy.steps.filters.value('sameSign',min=1),
                 #supy.steps.filters.value('oppositeFlavor',min=1),
                 supy.steps.filters.value('diMuon',min=1),
@@ -29,8 +28,7 @@ class example_analysis(supy.analysis):
                  cdil.sameFlavor(), cdil.oppositeFlavor(),
                  cdil.diMuon(), cdil.diElectron(),
                  cj.signalJets(), cj.indicesSignalJets(),
-                 ] +
-                [supy.calculables.other.fixedValue('Two', 2)]
+                 ]                
                 )
 
     def listOfSampleDictionaries(self):
