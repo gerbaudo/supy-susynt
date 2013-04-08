@@ -30,4 +30,17 @@ class oppositeFlavor(supy.wrappedChain.calculable) :
     def update(self, _) :
         self.value = not self.source['sameFlavor']
 #___________________________________________________________
-
+class diElectron(supy.wrappedChain.calculable) :
+    def __init__(self, collection = 'signalLeptons'):
+        self.coll = collection
+    def update(self, _) :
+        leptons = self.source[self.coll]
+        self.value = False if len(leptons)<2 else leptons[0].isEle() and leptons[1].isEle()
+#___________________________________________________________
+class diMuon(supy.wrappedChain.calculable) :
+    def __init__(self, collection = 'signalLeptons'):
+        self.coll = collection
+    def update(self, _) :
+        leptons = self.source[self.coll]
+        self.value = False if len(leptons)<2 else leptons[0].isMu() and leptons[1].isMu()
+#___________________________________________________________
