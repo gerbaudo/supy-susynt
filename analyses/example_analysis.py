@@ -9,7 +9,8 @@ class example_analysis(supy.analysis):
         return [supy.steps.printer.progressPrinter(),
                 supy.steps.histos.value('Two', 10, 0, 10),
                 supy.steps.filters.value('sameSign',min=1),
-                supy.steps.filters.value('oppositeFlavor',min=1),
+                #supy.steps.filters.value('oppositeFlavor',min=1),
+                supy.steps.filters.value('diMuon',min=1),
                 supy.steps.histos.multiplicity('signalJets',8),
                 supy.steps.filters.multiplicity('signalJets',min=2),
                 steps.histos.absEta('signalJets',20,0.,5.,'indicesSignalJets'),
@@ -26,6 +27,7 @@ class example_analysis(supy.analysis):
                 [cdil.signalLeptons(),
                  cdil.sameSign(), cdil.oppositeSign(),
                  cdil.sameFlavor(), cdil.oppositeFlavor(),
+                 cdil.diMuon(), cdil.diElectron(),
                  cj.signalJets(), cj.indicesSignalJets(),
                  ] +
                 [supy.calculables.other.fixedValue('Two', 2)]
