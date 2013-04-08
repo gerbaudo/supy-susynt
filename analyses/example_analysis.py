@@ -24,11 +24,10 @@ class example_analysis(supy.analysis):
         cj = calculables.jet
         lcals =  supy.calculables.zeroArgs(supy.calculables)
         lcals += [cdil.signalLeptons(),
-                  cdil.sameSign(), cdil.oppositeSign(),
-                  cdil.sameFlavor(), cdil.oppositeFlavor(),
-                  cdil.diMuon(), cdil.diElectron(),
                   cj.signalJets(), cj.indicesSignalJets(),
                   ]
+        lcals += supy.calculables.fromCollections(calculables.dilepton, [('signalLeptons','')])
+
         return lcals
 
     def listOfSampleDictionaries(self):
