@@ -5,11 +5,16 @@ import ROOT as r
 
 
 class dileptonSkim(supy.analysis):
+    def parameters(self) :
+        selections = self.vary()
+        selections['skim_ee'] = {'flag' : 'diElectron'    }
+        selections['skim_em'] = {'flag' : 'oppositeFlavor'}
+        selections['skim_mm'] = {'flag' : 'diMuon'        }
+        return {'selections' : selections}
     def listOfSteps(self, config):
+        skim = config['selections']['flag']
         return [supy.steps.printer.progressPrinter(),
-#                 supy.steps.filters.value('diElectron',min=1),
-#                 supy.steps.filters.value('diMuon',min=1),
-                supy.steps.filters.value('oppositeFlavor',min=1),
+                supy.steps.filters.value(skim,min=1),
                 supy.steps.other.skimmer(),
                 ]
 
