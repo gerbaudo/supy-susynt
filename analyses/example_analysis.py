@@ -10,8 +10,10 @@ class example_analysis(supy.analysis):
         return [supy.steps.printer.progressPrinter(),
                 supy.steps.filters.value('sameSign',min=1),
                 supy.steps.histos.multiplicity('signalJets',8),
+                supy.steps.histos.multiplicity('trueJets',8),
                 supy.steps.filters.multiplicity('signalJets',min=2),
                 steps.histos.absEta('signalJets',20,0.,5.,'indicesSignalJets'),
+                steps.histos.absEta('trueJets',20,0.,5.,'indicesTrueJets'),
                 ]
 
     def listOfCalculables(self, config):
@@ -20,6 +22,7 @@ class example_analysis(supy.analysis):
         lcals =  supy.calculables.zeroArgs(supy.calculables)
         lcals += [cdil.signalLeptons(),
                   cj.signalJets(), cj.indicesSignalJets(),
+                  cj.trueJets(), cj.indicesTrueJets(),
                   ]
         lcals += supy.calculables.fromCollections(calculables.dilepton, [('signalLeptons','')])
 
@@ -29,7 +32,8 @@ class example_analysis(supy.analysis):
         return [samples.localWh2Lep11]
 
     def listOfSamples(self, config):
-        return (supy.samples.specify(names='WH_2Lep_11_ee', color=r.kBlack)
+        return (supy.samples.specify(names='WH_2Lep_11', color=r.kBlack)
+                +supy.samples.specify(names='WH_2Lep_11_ee', color=r.kBlue)
                 +supy.samples.specify(names='WH_2Lep_11_em', color=r.kViolet)
                 +supy.samples.specify(names='WH_2Lep_11_mm', color=r.kRed)
                 )
