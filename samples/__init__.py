@@ -1,1 +1,2 @@
 from __localWh2Lep11__ import localWh2Lep11
+from __Sherpa_CT10_lllnu_WZ__ import Sherpa_CT10_lllnu_WZ
