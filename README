@@ -1,5 +1,9 @@
-localSetupROOT
-source $ROOTCOREDIR/scripts/setup.sh
+# localSetupROOT # only if you don't need the whole SUSYTools shebang
+                 # otherwise, see below
+cd rootcore/..
+asetup AtlasProduction,17.3.4.6,setup,here
+source Rootcore/scripts/setup.sh
+cd supy-susynt
 export PYTHONPATH=$PYTHONPATH:`pwd`                     # add directory containing supy to your python path
 export PATH=$PATH:`pwd`/supy/bin                        # optionally add to your path
 supy analyses/example_analysis.py --loop 1
