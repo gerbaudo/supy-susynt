@@ -15,6 +15,10 @@ class cutflow_WZ(supy.analysis):
         return [supy.steps.printer.progressPrinter(),
                 sf.GoodRun().onlyData(),
                 sf.LarErr(),
+                sf.TileErr(),
+                sf.TtcVeto(),
+                sf.GoodVertex(),
+                sf.TileTrip(),
                 supy.steps.filters.value('sameSign',min=1),
                 supy.steps.histos.multiplicity('signalJets',8),
                 supy.steps.histos.multiplicity('trueJets',8),
@@ -28,7 +32,8 @@ class cutflow_WZ(supy.analysis):
         cdil = calculables.dilepton
         ce, cj = calculables.event, calculables.jet
         lcals =  supy.calculables.zeroArgs(supy.calculables)
-        lcals += [ce.Grlt(pars['grlFile']), ce.IsGoodRun(), ce.LarErr()]
+        lcals += [ce.Grlt(pars['grlFile']), ce.IsGoodRun(), ce.LarErr(),
+                  ce.TileErr(), ce.TtcVeto(), ce.GoodVertex(), ce.TileTrip()]
         lcals += [cdil.signalLeptons(),
                   cj.signalJets(), cj.indicesSignalJets(),
                   cj.trueJets(), cj.indicesTrueJets(),
