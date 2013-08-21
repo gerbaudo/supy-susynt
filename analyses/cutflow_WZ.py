@@ -30,10 +30,11 @@ class cutflow_WZ(supy.analysis):
     def listOfCalculables(self, config):
         pars = self.parameters()
         cdil = calculables.dilepton
+        sc = supy.calculables
         ce, cj = calculables.event, calculables.jet
-        lcals =  supy.calculables.zeroArgs(supy.calculables)
-        lcals += [ce.Grlt(pars['grlFile']), ce.IsGoodRun(), ce.LarErr(),
-                  ce.TileErr(), ce.TtcVeto(), ce.GoodVertex(), ce.TileTrip()]
+        lcals =  sc.zeroArgs(supy.calculables)
+        lcals += [ce.Grlt(pars['grlFile'])]
+        lcals += sc.fromCollections(ce, ['event',])
         lcals += [cdil.signalLeptons(),
                   cj.signalJets(), cj.indicesSignalJets(),
                   cj.trueJets(), cj.indicesTrueJets(),
