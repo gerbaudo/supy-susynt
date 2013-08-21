@@ -39,17 +39,17 @@ class BitMask(supy.wrappedChain.calculable) :
         # print 'f & l ',(flag & ECut_GRL)
         # print 'runnumber : ',run,' ',event,' ',lb
 class IsGoodRun(BitMask) :
-    def __init__(self) : super(IsGoodRun, self).__init__('ECut_GRL')
+    def __init__(self, collection) : super(IsGoodRun, self).__init__('ECut_GRL')
 class LarErr(BitMask) :
-    def __init__(self) : super(LarErr, self).__init__('ECut_LarErr')
+    def __init__(self, collection) : super(LarErr, self).__init__('ECut_LarErr')
 class TileErr(BitMask) :
-    def __init__(self) : super(TileErr, self).__init__('ECut_TileErr')
+    def __init__(self, collection) : super(TileErr, self).__init__('ECut_TileErr')
 class TtcVeto(BitMask) :
-    def __init__(self) : super(TtcVeto, self).__init__('ECut_TTC')
+    def __init__(self, collection) : super(TtcVeto, self).__init__('ECut_TTC')
 class GoodVertex(BitMask) :
-    def __init__(self) : super(GoodVertex, self).__init__('ECut_GoodVtx')
+    def __init__(self, collection) : super(GoodVertex, self).__init__('ECut_GoodVtx')
 class TileTrip(BitMask) :
-    def __init__(self) : super(TileTrip, self).__init__('ECut_TileTrip')
+    def __init__(self, collection) : super(TileTrip, self).__init__('ECut_TileTrip')
 class Lar(BitMask) :
     "No el or jet in LAr hole; obsolete"
     def update(self, _) : self.value = True
